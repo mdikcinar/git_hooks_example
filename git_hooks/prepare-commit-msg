@@ -18,7 +18,8 @@ if [[ ! $commit_msg =~ $regexStart ]]; then
   echo "${yellow}pre-commit:${reset} Your commit message must start with some of these 'feature:' 'refactor:' 'fix:' 'docs:'${reset}"
   exit 1
 fi
+
 if [[ ! $commit_msg =~ $regexEnd ]]; then
-  echo "${yellow}pre-commit:${reset} Your commit message must end with issue number for ex. (AMT-333)'${reset}"
+  echo "${yellow}pre-commit:${reset} Your commit message must end with issue number in paranteses for ex. 'feat: example commit (AMT-333)''${reset}"
   exit 1
 fi
