@@ -10,10 +10,15 @@ reset='\033[0m'
 
 branchName=`git rev-parse --abbrev-ref HEAD`
 commit_msg=$(cat $1)
-regex='^(feature|refactor|fix|docs): .*'
+regexStart='^(feat|feature|refactor|fix|docs): .*'
+regexEnd='^.*\(AMT-[0-9]+\)$'
 
 
-if [[ ! $commit_msg =~ $regex ]]; then
+if [[ ! $commit_msg =~ $regexStart ]]; then
   echo "${yellow}pre-commit:${reset} Your commit message must start with some of these 'feature:' 'refactor:' 'fix:' 'docs:'${reset}"
+  exit 1
+fi
+if [[ ! $commit_msg =~ $regexEnd ]]; then
+  echo "${yellow}pre-commit:${reset} Your commit message must end with issue number for ex. (AMT-333)'${reset}"
   exit 1
 fi
