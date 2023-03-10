@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Get the commit message
+commit_msg=$(cat $1)
+
+# Check if the commit message starts with "feature:" or "refactor:"
+if ! [[ $commit_msg =~ ^(feature|refactor):.* ]]; then
+  echo "Your commit message must start with 'feature:' or 'refactor:'"
+  exit 1
+fi
