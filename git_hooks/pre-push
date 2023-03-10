@@ -1,0 +1,43 @@
+#!/bin/sh
+
+# Set the color variables
+yellow='\033[33m'
+red='\033[31m'
+green='\033[32m'
+reset='\033[0m'
+
+
+# Run code analysis before committing
+echo "${red}pre-push: ${Green}Running Dart Analyzer...${reset}"
+# Run flutter analyze and capture the exit status
+output_analyze=$(flutter analyze 2>&1)
+status_analyze=$?
+
+# Print the output of the analyze command
+echo "$output_analyze"
+
+# Exit with an error message if analysis fail
+if [ $status_analyze -ne 0 ]; then
+  echo "${red}pre-push: Some analysis failed. Aborting push.${reset}"
+  exit 1
+else
+    echo "${red}pre-push: ${Green}Dart Analyzer Passed.${reset}"
+fi
+
+
+
+# Run flutter test and capture the exit status
+echo "${red}pre-push: ${Green}Running Flutter Tests...${reset}"
+output_test=$(flutter test 2>&1)
+status_test=$?
+
+# Print the output of the test command
+echo "$output_test"
+
+# Exit with an error message if any tests fail
+if [ $status_test -ne 0 ]; then
+  echo "${red}pre-push: Some tests failed. Aborting push.${reset}"
+  exit 1
+else
+    echo "${red}pre-push: ${Green}All Tests Passed.${reset}"
+fi
