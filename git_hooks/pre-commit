@@ -6,7 +6,7 @@ reset='\033[0m'
 
 branch_name=`git rev-parse --abbrev-ref HEAD`
 
-num_of_commits="$(git rev-list --count HEAD ^${new_branch_name})"
+num_of_commits="$(git rev-list --count HEAD ${new_branch_name})"
 
 if [[ $num_of_commits = 0 ]]
 then
