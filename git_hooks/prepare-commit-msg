@@ -26,7 +26,7 @@ if [[ ! $commit_msg =~ $regex_commit_end ]]; then
     echo $issue
         # Append the issue key to the commit message
     if [ -n "$issue" ]; then
-    echo "$commit_msg" | sed -e "1s/^/[$issue] /" > $1
+    echo "$commit_msg($issue)" > $1
     else
         echo "${yellow}pre-commit:${reset} Your commit message must end with issue number in paranteses for ex. 'feat: example commit (AMT-333)''${reset}"
         exit 1
