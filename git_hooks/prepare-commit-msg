@@ -19,6 +19,7 @@ if [[ ! $commit_msg =~ $regex_commit_start ]]; then
 fi
 
 # Check commit message ends with one of the following words
+# If not add issue number end of commit message from branch name
 regex_commit_end='^.*\(AMT-[0-9]+\)$'
 if [[ ! $commit_msg =~ $regex_commit_end ]]; then
     # Extract the Jira issue key from the branch name
