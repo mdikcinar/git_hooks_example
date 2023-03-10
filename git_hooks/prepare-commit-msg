@@ -24,7 +24,6 @@ regex_commit_end='^.*\(AMT-[0-9]+\)$'
 if [[ ! $commit_msg =~ $regex_commit_end ]]; then
     # Extract the Jira issue key from the branch name
     issue=$(echo "$branch_name" | awk -F/ '{print $2}')
-    echo $issue
         # Append the issue key to the commit message
     if [ -n "$issue" ]; then
     echo "$commit_msg($issue)" > $1

@@ -2,19 +2,26 @@
 
 # Set the color variables
 yellow='\033[33m'
+red='\033[31m'
 reset='\033[0m'
 
+
+branch=$(git branch --show-current)
+if [ "$branch" = "master" ] || [ "$branch" = "develop" ]; then
+  echo "ERROR: You are not allowed to commit directly to the ${red}$branch${reset} branch."
+  echo "Please create a new branch and submit a pull request instead."
+  exit 1
+fi
+
+
 branch_name=`git rev-parse --abbrev-ref HEAD`
-
 num_of_commits="$(git rev-list --count HEAD ${new_branch_name})"
-
-
 
 # check is new branch name is valid
 regex_branch_name='^(feature|bugfix|hotfix)\/AMT-\d+'
 if [[ $num_of_commits = 0 ]]; then
     if ! [[ $branch_name =~ $regex_branch_name ]]; then
-    echo "${yellow}pre-push:${reset} $branch_name Branch name must start with 'feature/AMT-', 'bugfix/AMT-', or 'hotfix/AMT-', followed by one or more digits.${reset}"
+    echo "${yellow}pre-push:${reset} ${red}$branch_name${reset} Branch name must start with 'feature/AMT-', 'bugfix/AMT-', or 'hotfix/AMT-', followed by one or more digits.${reset}"
     exit 1
     fi
 fi
