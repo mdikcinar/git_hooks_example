@@ -1,10 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 
 yellow='\033[33m'
 red='\033[31m'
 green='\033[32m'
 reset='\033[0m'
 
-short_commit_hash='git log -1 --format=%h'
+# Get the last commit hash
+last_commit=$(git rev-parse --short HEAD)
 
-echo "${green}Push to remote repository was successful. $short_commit_hash"
+# Display success message with commit hash
+echo "${green}Push successful! Last commit: $last_commit ${reset}"
