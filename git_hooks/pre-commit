@@ -8,8 +8,8 @@ reset='\033[0m'
 
 branch=$(git branch --show-current)
 if [ "$branch" = "master" ] || [ "$branch" = "develop" ]; then
-  echo "ERROR: You are not allowed to commit directly to the ${red}$branch${reset} branch."
-  echo "Please create a new branch and submit a pull request instead."
+  echo "${yellow}ERROR:${reset} You are not allowed to commit directly to the ${red}$branch${reset} branch."
+  echo "${yellow}Please create a new branch and submit a pull request instead.${reset}"
   exit 1
 fi
 
