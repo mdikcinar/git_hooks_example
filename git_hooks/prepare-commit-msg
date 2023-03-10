@@ -6,6 +6,8 @@ SHA1=$3
 
 # Set the color variables
 yellow='\033[33m'
+red='\033[31m'
+green='\033[32m'
 reset='\033[0m'
 
 branch_name=`git rev-parse --abbrev-ref HEAD`
@@ -14,7 +16,7 @@ commit_msg=$(cat $1)
 # Check commit message starts with one of the following words
 regex_commit_start='^(feat|feature|refactor|fix|docs): .*'
 if [[ ! $commit_msg =~ $regex_commit_start ]]; then
-  echo "${yellow}pre-commit:${reset} Your commit message must start with some of these 'feature:' 'refactor:' 'fix:' 'docs:'${reset}"
+  echo "${red}pre-commit:${yellow} Your commit message must start with some of these ${green}'feature:' 'refactor:' 'fix:' 'docs:'${reset}"
   exit 1
 fi
 
@@ -28,7 +30,7 @@ if [[ ! $commit_msg =~ $regex_commit_end ]]; then
     if [ -n "$issue" ]; then
     echo "$commit_msg($issue)" > $1
     else
-        echo "${yellow}pre-commit:${reset} Your commit message must end with issue number in paranteses for ex. 'feat: example commit (AMT-333)''${reset}"
+        echo "${red}pre-commit:${yellow} Your commit message must end with issue number in paranteses for ex. ${green}'feat: example commit (AMT-333)''${reset}"
         exit 1
     fi
 fi
