@@ -21,17 +21,12 @@ fi
 # Check commit message ends with one of the following words
 regex_commit_end='^.*\(AMT-[0-9]+\)$'
 if [[ ! $commit_msg =~ $regex_commit_end ]]; then
-    regex_branch_name='^(feature|bugfix|hotfix)\/AMT-\d+'
-    echo $branch_name
-    if [[ $branch_name =~ $regex_branch_name ]]; then
-        # Extract the Jira issue key from the branch name
-        issue=$(echo "$branch" | awk -F/ '{print $2}')
-        echo $issue
+    # Extract the Jira issue key from the branch name
+    issue=$(echo "$branch_name" | awk -F/ '{print $2}')
+    echo $issue
         # Append the issue key to the commit message
-        if [ -n "$issue" ]; then
-        message=$(cat $1)
-        echo "$message" | sed -e "1s/^/[$issue] /" > $1
-        fi
+    if [ -n "$issue" ]; then
+    echo "$commit_msg" | sed -e "1s/^/[$issue] /" > $1
     else
         echo "${yellow}pre-commit:${reset} Your commit message must end with issue number in paranteses for ex. 'feat: example commit (AMT-333)''${reset}"
         exit 1
