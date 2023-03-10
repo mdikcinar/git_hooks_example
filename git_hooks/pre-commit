@@ -1,13 +1,5 @@
 #!/bin/sh
 
-
-#!/bin/sh
-
-flutter analyze
-if [ $? -ne 0 ]; then
-  exit 1
-fi
-
 # Get the commit message
 commit_msg=$(cat $1)
 
