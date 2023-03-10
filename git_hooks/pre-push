@@ -8,7 +8,7 @@ reset='\033[0m'
 
 
 # Run code analysis before committing
-echo "${red}pre-push: ${Green}Running Dart Analyzer...${reset}"
+echo "${red}pre-push: ${green}Running Dart Analyzer...${reset}"
 # Run flutter analyze and capture the exit status
 output_analyze=$(flutter analyze 2>&1)
 status_analyze=$?
@@ -21,7 +21,7 @@ if [ $status_analyze -ne 0 ]; then
   echo "${red}pre-push: Some analysis failed. Aborting push.${reset}"
   exit 1
 else
-    echo "${red}pre-push: ${Green}Dart Analyzer Passed.${reset}"
+    echo "${red}pre-push: ${green}Dart Analyzer Passed.${reset}"
 fi
 
 
