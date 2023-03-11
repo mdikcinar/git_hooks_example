@@ -1,0 +1,6 @@
+#!/bin/sh
+green='\033[32m'
+reset='\033[0m'
+# Run init.sh after chekout
+echo "${green}Branch switched, Running init.sh...${reset}"
+sh init.sh
